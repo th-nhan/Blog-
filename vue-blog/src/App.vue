@@ -1,47 +1,41 @@
-<script setup>
-import HelloWorld from './components/HelloWorld.vue'
-import TheWelcome from './components/TheWelcome.vue'
-</script>
-
 <template>
-  <header>
-    <img alt="Vue logo" class="logo" src="./assets/logo.svg" width="125" height="125" />
+  <div>
+    <!-- Navbar -->
+    <nav>
+      <router-link to="/">Trang chủ</router-link>
+      <router-link v-if="!authStore.user" to="/login">Đăng nhập</router-link>
+      <router-link v-if="!authStore.user" to="/register">Đăng ký</router-link>
+      <router-link v-if="authStore.user" to="/new-post">Viết bài</router-link>
+      <button v-if="authStore.user" @click="logout">Đăng xuất</button>
+    </nav>
 
-    <div class="wrapper">
-      <HelloWorld msg="You did it!" />
-    </div>
-  </header>
-
-  <main>
-    <TheWelcome />
-  </main>
+    <!-- Hiển thị trang -->
+    <router-view />
+  </div>
 </template>
 
-<style scoped>
-header {
-  line-height: 1.5;
+<script setup>
+import { useAuthStore } from '@/stores/authStore'
+
+const authStore = useAuthStore()
+
+const logout = () => {
+  authStore.logout()
 }
+</script>
 
-.logo {
-  display: block;
-  margin: 0 auto 2rem;
+<style>
+nav {
+  display: flex;
+  gap: 15px;
+  padding: 10px;
+  background: #333;
 }
-
-@media (min-width: 1024px) {
-  header {
-    display: flex;
-    place-items: center;
-    padding-right: calc(var(--section-gap) / 2);
-  }
-
-  .logo {
-    margin: 0 2rem 0 0;
-  }
-
-  header .wrapper {
-    display: flex;
-    place-items: flex-start;
-    flex-wrap: wrap;
-  }
+nav a, nav button {
+  color: white;
+  text-decoration: none;
+  background: none;
+  border: none;
+  cursor: pointer;
 }
 </style>

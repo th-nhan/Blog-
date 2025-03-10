@@ -37,8 +37,10 @@
       error.value = err.message
     }
   }
-</script>
+</script> 
   
+
+
 <style scoped>
   .register-container {
     max-width: 400px;

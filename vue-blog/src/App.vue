@@ -6,7 +6,7 @@
       <router-link v-if="!authStore.user" to="/login">Đăng nhập</router-link>
       <router-link v-if="!authStore.user" to="/register">Đăng ký</router-link>
       <router-link v-if="authStore.user" to="/new-post">Viết bài</router-link>
-      <button v-if="authStore.user" @click="logout">Đăng xuất</button>
+      <button class="btn-signIn" v-if="authStore.user" @click="logout">Đăng xuất</button>
     </nav>
 
     <!-- Hiển thị trang -->
@@ -37,5 +37,9 @@ nav a, nav button {
   background: none;
   border: none;
   cursor: pointer;
+}
+
+.btn-signIn{
+  padding: 0;
 }
 </style>
